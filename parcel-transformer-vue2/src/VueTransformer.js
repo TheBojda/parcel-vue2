@@ -347,7 +347,7 @@ ${options.hmrOptions
             preprocessLang: style.lang || 'css',
             scoped: style.scoped ? true : false,
             map: style.src ? undefined : style.map,
-            id,
+            id: 'data-v-' + id,
           });
           if (styleComp.errors.length) {
             throw new ThrowableDiagnostic({
