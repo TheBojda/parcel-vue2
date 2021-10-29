@@ -109,6 +109,7 @@ let initialize = () => {
   ${template != null
             ? `script.render = require('template:./${basePath}').render;
             script.staticRenderFns = require('template:./${basePath}').staticRenderFns;
+            script._scopeId = "${scopeId}";
             `
             : ''
           }
