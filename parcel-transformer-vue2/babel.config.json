@@ -1,0 +1,13 @@
+{
+  "presets": [
+    "@parcel/babel-preset",
+  ],
+  "plugins": [
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ]
+  ]
+}
