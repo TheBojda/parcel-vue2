@@ -2,14 +2,15 @@
   <p>{{ greeting }} World!</p>
 </template>
 
-<script lang="js">
-module.exports = {
-  data: function () {
-    return {
-      greeting: 'Hello'
-    }
-  }
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+
+// @Component
+class App extends Vue {
+  public greeting: string = "Hello";
 }
+
+export default Component(App);
 </script>
 
 <style scoped>
