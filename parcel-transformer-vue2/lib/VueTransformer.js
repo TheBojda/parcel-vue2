@@ -141,7 +141,9 @@ let script;
 let initialize = () => {
   script = ${script != null ? `require('script:./${basePath}');
   if (script.__esModule) script = script.default` : '{}'};
-  ${template != null ? `script.render = require('template:./${basePath}').render;` : ''}
+  ${template != null ? `script.render = require('template:./${basePath}').render;
+            script.staticRenderFns = require('template:./${basePath}').staticRenderFns;
+            ` : ''}
   ${styles.length !== 0 ? `script.__cssModules = require('style:./${basePath}').default;` : ''}
   ${customBlocks != null ? `require('custom:./${basePath}').default(script);` : ''}
   script.__scopeId = '${scopeId}';
@@ -266,7 +268,7 @@ async function processPipeline({
         }, !template.src && asset.env.sourceMap && {
           map: createMap(templateComp.map, options.projectRoot)
         }), {}, {
-          content: templateComp.code + '\nexports.render = render;\n' + `
+          content: templateComp.code + '\nexports.render = render;\nexports.staticRenderFns = staticRenderFns;\n' + `
 ${options.hmrOptions ? `if (module.hot) {
   module.hot.accept(() => {
     __VUE_HMR_RUNTIME__.rerender('${hmrId}', render);
