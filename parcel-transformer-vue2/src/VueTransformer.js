@@ -344,7 +344,7 @@ ${options.hmrOptions
             source: style.content,
             modules: style.module,
             preprocessLang: style.lang || 'css',
-            scoped: style.scoped,
+            scoped: style.scoped ? true : false,
             map: style.src ? undefined : style.map,
             id,
           });
