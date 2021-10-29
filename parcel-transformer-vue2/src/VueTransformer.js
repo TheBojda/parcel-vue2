@@ -107,7 +107,9 @@ let initialize = () => {
             : '{}'
           };
   ${template != null
-            ? `script.render = require('template:./${basePath}').render;`
+            ? `script.render = require('template:./${basePath}').render;
+            script.staticRenderFns = require('template:./${basePath}').staticRenderFns;
+            `
             : ''
           }
   ${styles.length !== 0
@@ -241,7 +243,7 @@ async function processPipeline({
           map: createMap(templateComp.map, options.projectRoot),
         }),
         content:
-          templateComp.code + '\nexports.render = render;\n' +
+          templateComp.code + '\nexports.render = render;\nexports.staticRenderFns = staticRenderFns;\n' +
           `
 ${options.hmrOptions
             ? `if (module.hot) {
