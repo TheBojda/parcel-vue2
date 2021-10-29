@@ -57,7 +57,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-// @Component
+@Component
 class App extends Vue {
   public form = {
     email: "",
@@ -95,7 +95,7 @@ class App extends Vue {
   }
 }
 
-export default Component(App);
+export default App;
 </script>
 
 <style scoped>
