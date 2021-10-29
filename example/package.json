@@ -11,6 +11,7 @@
 		"parcel-transformer-vue2": "*"
 	},
 	"dependencies": {
+		"bootstrap-vue": "^2.21.2",
 		"vue": "^2.6.14",
 		"vue-property-decorator": "^9.1.2"
 	}
