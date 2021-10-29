@@ -9,8 +9,7 @@ const compiler = require('vue-template-compiler');
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-function $parse(source, parseOptions)
-{
+function $parse(source, parseOptions) {
     // Pull out options so they can be more easily mapped.
     const { sourceMap, filename, sourceRoot, pad } = parseOptions;
 
@@ -24,15 +23,18 @@ function $parse(source, parseOptions)
         needMap: sourceMap
     });
 
-    if(descriptor.script) {
+    if (descriptor.script) {
         // Remove the obnoxious comment newlines in the generated code
         descriptor.script.content = descriptor.script.content.replace(/\/\/\n/g, '');
 
         // Support using `Vue.extends()`. Code adapted from:
         // https://github.com/vuejs/vue-loader/blob/master/lib/runtime/componentNormalizer.js#L17-L20
-        descriptor.script.content = descriptor.script.content.replace('export default ', 'var scriptExports = ');
-        descriptor.script.content += '\nvar options = typeof scriptExports === \'function\' ? scriptExports.options : scriptExports;';
-        descriptor.script.content += '\nexport default options;'
+
+        if (descriptor.script.content.indexOf("// parcel transformer vue2 compiler hack") == -1) {
+            descriptor.script.content = descriptor.script.content.replace('export default ', 'var scriptExports = ');
+            descriptor.script.content += '\nvar options = typeof scriptExports === \'function\' ? scriptExports.options : scriptExports;';
+            descriptor.script.content += '\nexport default options; // parcel transformer vue2 compiler hack'
+        }
     }
 
     return {
@@ -41,8 +43,7 @@ function $parse(source, parseOptions)
     }
 }
 
-function $compileTemplate(options)
-{
+function $compileTemplate(options) {
     // There's a lot more work we'd have to do to be 100% compatible, but the snowpack plugin only passes in 5 options,
     // and they all line up except for `compilerOptions`. So, meh, let's only worry about what we have to.
 
@@ -50,8 +51,7 @@ function $compileTemplate(options)
     // we ignore all the hard work the plugin did, and just toggle a boolean so the compiler will redo the work. Eh, as
     // far as hacks go, this isn't the worst.
     const scopeId = options && options.compilerOptions && options.compilerOptions.scopeId;
-    if(scopeId)
-    {
+    if (scopeId) {
         options.scoped = true;
     } // end if
 
@@ -62,7 +62,7 @@ function $compileTemplate(options)
 
     const results = compileTemplate({ ...options, compiler });
 
-    if(scopeId) {
+    if (scopeId) {
         results.code += `\ndefaultExport._scopeId = "${scopeId}";`;
     }
 
@@ -70,8 +70,7 @@ function $compileTemplate(options)
     return { ...results };
 }
 
-function $compileStyle(options)
-{
+function $compileStyle(options) {
     // There's a lot more work we'd have to do to be 100% compatible, but the snowpack plugin only passes in 6 options,
     // and they all line up. So, meh, let's only worry about what we have to.
 
