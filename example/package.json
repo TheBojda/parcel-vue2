@@ -1,0 +1,16 @@
+{
+	"private": true,
+	"name": "example",
+	"version": "0.0.0",
+	"scripts": {
+		"start": "parcel index.html",
+		"build": "parcel build index.html"
+	},
+	"devDependencies": {
+		"parcel": "^2.0.0",
+		"parcel-transformer-vue2": "*"
+	},
+	"dependencies": {
+		"vue": "^2.6.14"
+	}
+}
