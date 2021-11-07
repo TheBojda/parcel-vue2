@@ -6,6 +6,20 @@
 	"publishConfig": {
 		"access": "public"
 	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/TheBojda/parcel-vue2.git"
+	},
+	"keywords": [
+		"parcel2",
+		"vue2",
+		"parcel-transformer"
+	],
+	"author": "TheBojda",
+	"bugs": {
+		"url": "https://github.com/TheBojda/parcel-vue2/issues"
+	},
+	"homepage": "https://github.com/TheBojda/parcel-vue2#readme",
 	"dependencies": {
 		"@parcel/diagnostic": "^2.0.0",
 		"@parcel/plugin": "^2.0.0",
