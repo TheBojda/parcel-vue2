@@ -1,5 +1,4 @@
-# parcel-vue2
-Vue2 transformer for Parcel 2
+# Vue 2 transformer plugin for Parcel 2
 
 ## Installation
 
@@ -21,10 +20,3 @@ Add a `.parcelrc` file to your project with the following content:
 ```
 
 If you need an example project, please check: https://github.com/TheBojda/parcel-vue2/tree/main/example-npm
-
-## Instructions for building the plugin
-
-- Run yarn in the root folder
-- Run babel ./src --out-dir ./lib in the parcel-transformer-vue2 folder
-- Run yarn start in the example folder
-
