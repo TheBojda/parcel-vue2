@@ -143,6 +143,7 @@ let initialize = () => {
   if (script.__esModule) script = script.default` : '{}'};
   ${template != null ? `script.render = require('template:./${basePath}').render;
             script.staticRenderFns = require('template:./${basePath}').staticRenderFns;
+            script._scopeId = "${scopeId}";
             ` : ''}
   ${styles.length !== 0 ? `script.__cssModules = require('style:./${basePath}').default;` : ''}
   ${customBlocks != null ? `require('custom:./${basePath}').default(script);` : ''}
@@ -372,9 +373,9 @@ ${options.hmrOptions ? `if (module.hot) {
             source: style.content,
             modules: style.module,
             preprocessLang: style.lang || 'css',
-            scoped: style.scoped,
+            scoped: style.scoped ? true : false,
             map: style.src ? undefined : style.map,
-            id
+            id: 'data-v-' + id
           });
 
           if (styleComp.errors.length) {
