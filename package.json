@@ -2,7 +2,8 @@
 	"private": true,
 	"workspaces": [
 		"example",
-		"parcel-transformer-vue2"
+		"parcel-transformer-vue2",
+		"parcel-config-vue2"
 	],
 	"devDependencies": {
 		"@babel/core": "^7.12.0",
