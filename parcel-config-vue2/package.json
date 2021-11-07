@@ -1,0 +1,29 @@
+{
+	"name": "parcel-config-vue2",
+	"version": "0.1.2",
+	"license": "MIT",
+	"main": "index.json",
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/TheBojda/parcel-vue2.git"
+	},
+	"keywords": [
+		"parcel2",
+		"vue2",
+		"parcel-config"
+	],
+	"author": "TheBojda",
+	"bugs": {
+		"url": "https://github.com/TheBojda/parcel-vue2/issues"
+	},
+	"homepage": "https://github.com/TheBojda/parcel-vue2#readme",
+	"engines": {
+		"parcel": "^2.0.0"
+	},
+	"parcelDependencies": {
+		"parcel-transformer-vue2": ">=0.1.1"
+	}
+}
