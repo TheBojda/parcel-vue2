@@ -1,6 +1,6 @@
 {
 	"name": "parcel-config-vue2",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"license": "MIT",
 	"main": "index.json",
 	"publishConfig": {
@@ -24,6 +24,6 @@
 		"parcel": "^2.0.0"
 	},
 	"parcelDependencies": {
-		"parcel-transformer-vue2": ">=0.1.1"
+		"parcel-transformer-vue2": ">= 0.1.3"
 	}
 }

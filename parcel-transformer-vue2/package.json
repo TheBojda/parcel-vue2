@@ -1,6 +1,6 @@
 {
 	"name": "parcel-transformer-vue2",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"license": "MIT",
 	"main": "lib/VueTransformer.js",
 	"publishConfig": {
@@ -28,7 +28,8 @@
 		"consolidate": "^0.16.0",
 		"nullthrows": "^1.1.1",
 		"semver": "^5.4.1",
-		"vue-template-compiler": "^2.6.14"
+		"vue-template-compiler": "^2.6.14",
+		"@vue/component-compiler-utils": "^3.3.0"
 	},
 	"engines": {
 		"node": ">=12",
@@ -37,7 +38,6 @@
 	"devDependencies": {
 		"@babel/plugin-proposal-decorators": "^7.15.8",
 		"@babel/preset-flow": "^7.14.5",
-		"@parcel/babel-preset": "^2.0.0-alpha.2",
-		"@vue/component-compiler-utils": "^3.3.0"
+		"@parcel/babel-preset": "^2.0.0-alpha.2"
 	}
 }
