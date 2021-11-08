@@ -45,8 +45,8 @@ function $parse(source, parseOptions) {
     // https://github.com/vuejs/vue-loader/blob/master/lib/runtime/componentNormalizer.js#L17-L20
 
     if (descriptor.script.content.indexOf("// parcel transformer vue2 compiler hack") == -1) {
-      // descriptor.script.content = descriptor.script.content.replace('export default ', 'var scriptExports = ');
-      descriptor.script.content += '\nvar scriptExports = exports.default;';
+      descriptor.script.content = descriptor.script.content.replace('export default ', 'var scriptExports = '); // descriptor.script.content += '\nvar scriptExports = exports.default;';
+
       descriptor.script.content += '\nvar options = typeof scriptExports === \'function\' ? scriptExports.options : scriptExports;';
       descriptor.script.content += '\nexport default options; // parcel transformer vue2 compiler hack';
     }
