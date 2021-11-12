@@ -156,9 +156,11 @@ ${options.hmrOptions ? `if (module.hot) {
   module.hot.accept(() => {
     setTimeout(() => {
       initialize();
-      if (!__VUE_HMR_RUNTIME__.createRecord('${hmrId}', script)) {
-        __VUE_HMR_RUNTIME__.reload('${hmrId}', script);
-      }
+      console.log('3333');
+      window.location.reload();
+      // if (!__VUE_HMR_RUNTIME__.createRecord('${hmrId}', script)) {
+      //  __VUE_HMR_RUNTIME__.reload('${hmrId}', script);
+      //}
     }, 0);
   });
 }` : ''}
@@ -272,7 +274,9 @@ async function processPipeline({
           content: templateComp.code + '\nexports.render = render;\nexports.staticRenderFns = staticRenderFns;\n' + `
 ${options.hmrOptions ? `if (module.hot) {
   module.hot.accept(() => {
-    __VUE_HMR_RUNTIME__.rerender('${hmrId}', render);
+    console.log('1111');
+    window.location.reload();
+    // __VUE_HMR_RUNTIME__.rerender('${hmrId}', render);
   })
 }` : ''}`
         });
@@ -413,7 +417,9 @@ import {render} from 'template:./${basePath}';
 let cssModules = ${JSON.stringify(cssModules)};
 ${options.hmrOptions ? `if (module.hot) {
   module.hot.accept(() => {
-    __VUE_HMR_RUNTIME__.rerender('${hmrId}', render);
+    console.log('2222');
+    window.location.reload();
+    // __VUE_HMR_RUNTIME__.rerender('${hmrId}', render);
   });
 };` : ''}
 export default cssModules;`

@@ -133,9 +133,10 @@ ${options.hmrOptions
   module.hot.accept(() => {
     setTimeout(() => {
       initialize();
-      if (!__VUE_HMR_RUNTIME__.createRecord('${hmrId}', script)) {
-        __VUE_HMR_RUNTIME__.reload('${hmrId}', script);
-      }
+      window.location.reload();
+      // if (!__VUE_HMR_RUNTIME__.createRecord('${hmrId}', script)) {
+      //  __VUE_HMR_RUNTIME__.reload('${hmrId}', script);
+      // }
     }, 0);
   });
 }`
@@ -249,7 +250,8 @@ async function processPipeline({
 ${options.hmrOptions
             ? `if (module.hot) {
   module.hot.accept(() => {
-    __VUE_HMR_RUNTIME__.rerender('${hmrId}', render);
+    window.location.reload();
+    // __VUE_HMR_RUNTIME__.rerender('${hmrId}', render);
   })
 }`
             : ''
@@ -386,7 +388,8 @@ let cssModules = ${JSON.stringify(cssModules)};
 ${options.hmrOptions
               ? `if (module.hot) {
   module.hot.accept(() => {
-    __VUE_HMR_RUNTIME__.rerender('${hmrId}', render);
+    window.location.reload();
+    // __VUE_HMR_RUNTIME__.rerender('${hmrId}', render);
   });
 };`
               : ''
