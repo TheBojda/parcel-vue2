@@ -20,6 +20,6 @@ If you need an example project, please check: https://github.com/TheBojda/parcel
 ## Instructions for building the plugin
 
 - Run `yarn` in the root folder
-- Run `babel ./src --out-dir ./lib` in the parcel-transformer-vue2 folder
+- Run `yarn build` in the parcel-transformer-vue2 folder
 - Run `yarn start` in the example folder
 

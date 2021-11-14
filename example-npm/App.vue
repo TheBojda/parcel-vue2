@@ -77,6 +77,7 @@ class App extends Vue {
 
   onSubmit(event) {
     event.preventDefault();
+    console.log('xxx');
     alert(JSON.stringify(this.form));
   }
 

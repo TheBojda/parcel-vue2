@@ -130,13 +130,21 @@ initialize();
 ${options.hmrOptions
             ? `if (module.hot) {
   script.__hmrId = '${hmrId}';
+
+  if(!window.__VUE_HMR_RUNTIME__) {
+    const api = require('vue-hot-reload-api')
+    const Vue = require('vue')
+    api.install(Vue)
+    window.__VUE_HMR_RUNTIME__ = api;
+  }
+
+  window.__VUE_HMR_RUNTIME__.createRecord('${hmrId}', script);
+
   module.hot.accept(() => {
     setTimeout(() => {
       initialize();
-      window.location.reload();
-      // if (!__VUE_HMR_RUNTIME__.createRecord('${hmrId}', script)) {
-      //  __VUE_HMR_RUNTIME__.reload('${hmrId}', script);
-      // }
+      // window.location.reload();
+      window.__VUE_HMR_RUNTIME__.reload('${hmrId}', script);
     }, 0);
   });
 }`
@@ -250,8 +258,16 @@ async function processPipeline({
 ${options.hmrOptions
             ? `if (module.hot) {
   module.hot.accept(() => {
-    window.location.reload();
-    // __VUE_HMR_RUNTIME__.rerender('${hmrId}', render);
+    // window.location.reload();
+    
+    if(!window.__VUE_HMR_RUNTIME__) {
+      const api = require('vue-hot-reload-api')
+      const Vue = require('vue')
+      api.install(Vue)
+      window.__VUE_HMR_RUNTIME__ = api;
+    }
+
+    window.__VUE_HMR_RUNTIME__.rerender('${hmrId}', exports);
   })
 }`
             : ''
@@ -388,8 +404,16 @@ let cssModules = ${JSON.stringify(cssModules)};
 ${options.hmrOptions
               ? `if (module.hot) {
   module.hot.accept(() => {
-    window.location.reload();
-    // __VUE_HMR_RUNTIME__.rerender('${hmrId}', render);
+    // window.location.reload();
+    
+    if(!window.__VUE_HMR_RUNTIME__) {
+      const api = require('vue-hot-reload-api')
+      const Vue = require('vue')
+      api.install(Vue)
+      window.__VUE_HMR_RUNTIME__ = api;
+    }
+
+    window.__VUE_HMR_RUNTIME__.rerender('${hmrId}', render);
   });
 };`
               : ''

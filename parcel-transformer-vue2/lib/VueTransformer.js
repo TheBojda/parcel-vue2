@@ -153,14 +153,21 @@ let initialize = () => {
 initialize();
 ${options.hmrOptions ? `if (module.hot) {
   script.__hmrId = '${hmrId}';
+
+  if(!window.__VUE_HMR_RUNTIME__) {
+    const api = require('vue-hot-reload-api')
+    const Vue = require('vue')
+    api.install(Vue)
+    window.__VUE_HMR_RUNTIME__ = api;
+  }
+
+  window.__VUE_HMR_RUNTIME__.createRecord('${hmrId}', script);
+
   module.hot.accept(() => {
     setTimeout(() => {
       initialize();
-      console.log('3333');
-      window.location.reload();
-      // if (!__VUE_HMR_RUNTIME__.createRecord('${hmrId}', script)) {
-      //  __VUE_HMR_RUNTIME__.reload('${hmrId}', script);
-      //}
+      // window.location.reload();
+      window.__VUE_HMR_RUNTIME__.reload('${hmrId}', script);
     }, 0);
   });
 }` : ''}
@@ -274,9 +281,16 @@ async function processPipeline({
           content: templateComp.code + '\nexports.render = render;\nexports.staticRenderFns = staticRenderFns;\n' + `
 ${options.hmrOptions ? `if (module.hot) {
   module.hot.accept(() => {
-    console.log('1111');
-    window.location.reload();
-    // __VUE_HMR_RUNTIME__.rerender('${hmrId}', render);
+    // window.location.reload();
+    
+    if(!window.__VUE_HMR_RUNTIME__) {
+      const api = require('vue-hot-reload-api')
+      const Vue = require('vue')
+      api.install(Vue)
+      window.__VUE_HMR_RUNTIME__ = api;
+    }
+
+    window.__VUE_HMR_RUNTIME__.rerender('${hmrId}', exports);
   })
 }` : ''}`
         });
@@ -417,9 +431,16 @@ import {render} from 'template:./${basePath}';
 let cssModules = ${JSON.stringify(cssModules)};
 ${options.hmrOptions ? `if (module.hot) {
   module.hot.accept(() => {
-    console.log('2222');
-    window.location.reload();
-    // __VUE_HMR_RUNTIME__.rerender('${hmrId}', render);
+    // window.location.reload();
+    
+    if(!window.__VUE_HMR_RUNTIME__) {
+      const api = require('vue-hot-reload-api')
+      const Vue = require('vue')
+      api.install(Vue)
+      window.__VUE_HMR_RUNTIME__ = api;
+    }
+
+    window.__VUE_HMR_RUNTIME__.rerender('${hmrId}', render);
   });
 };` : ''}
 export default cssModules;`
