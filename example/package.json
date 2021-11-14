@@ -5,7 +5,8 @@
 	"scripts": {
 		"start": "parcel index.html",
 		"build": "parcel build index.html",
-		"watch": "parcel watch index.html"
+		"watch": "parcel watch index.html",
+		"serve": "parcel serve index.html"
 	},
 	"devDependencies": {
 		"@babel/plugin-proposal-decorators": "^7.15.8",

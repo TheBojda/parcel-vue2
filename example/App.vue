@@ -101,6 +101,6 @@ export default App;
 <style scoped>
 p {
   font-size: 2em;
-  text-align: c;
+  text-align: center;
 }
 </style>
