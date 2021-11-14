@@ -14,9 +14,9 @@ const {
   parse,
   compileTemplate,
   compileStyle
-} = require('@vue/component-compiler-utils');
+} = require("@vue/component-compiler-utils");
 
-const compiler = require('vue-template-compiler'); // ---------------------------------------------------------------------------------------------------------------------
+const compiler = require("vue-template-compiler"); // ---------------------------------------------------------------------------------------------------------------------
 
 
 function $parse(source, parseOptions) {
@@ -33,7 +33,7 @@ function $parse(source, parseOptions) {
     filename,
     compiler,
     compilerParseOptions: {
-      pad: pad === 'space' ? 'space' : 'line'
+      pad: pad === "space" ? "space" : "line"
     },
     sourceRoot,
     needMap: sourceMap
@@ -41,14 +41,14 @@ function $parse(source, parseOptions) {
 
   if (descriptor.script) {
     // Remove the obnoxious comment newlines in the generated code
-    descriptor.script.content = descriptor.script.content.replace(/\/\/\n/g, ''); // Support using `Vue.extends()`. Code adapted from:
+    descriptor.script.content = descriptor.script.content.replace(/\/\/\n/g, ""); // Support using `Vue.extends()`. Code adapted from:
     // https://github.com/vuejs/vue-loader/blob/master/lib/runtime/componentNormalizer.js#L17-L20
 
     if (descriptor.script.content.indexOf("// parcel transformer vue2 compiler hack") == -1) {
-      descriptor.script.content = descriptor.script.content.replace('export default ', 'var scriptExports = '); // descriptor.script.content += '\nvar scriptExports = exports.default;';
+      descriptor.script.content = descriptor.script.content.replace("export default ", "var scriptExports = "); // descriptor.script.content += '\nvar scriptExports = exports.default;';
 
-      descriptor.script.content += '\nvar options = typeof scriptExports === \'function\' ? scriptExports.options : scriptExports;';
-      descriptor.script.content += '\nexport default options; // parcel transformer vue2 compiler hack';
+      descriptor.script.content += "\nvar options = typeof scriptExports === 'function' ? scriptExports.options : scriptExports;";
+      descriptor.script.content += "\nexport default options; // parcel transformer vue2 compiler hack";
     }
   }
 

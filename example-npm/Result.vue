@@ -10,7 +10,7 @@ import Vue from "vue";
 export default Vue.extend({
   name: "AppResult",
   props: {
-    value: String
-  }
+    value: String,
+  },
 });
 </script>

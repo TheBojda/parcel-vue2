@@ -59,15 +59,15 @@ import Result from "./Result.vue";
 
 @Component({
   components: {
-    Result
-  }
+    Result,
+  },
 })
 class App extends Vue {
   public form = {
     email: "",
     name: "",
     food: null,
-    checked: []
+    checked: [],
   };
 
   public foods = [
@@ -75,7 +75,7 @@ class App extends Vue {
     "Carrots",
     "Beans",
     "Tomatoes",
-    "Corn"
+    "Corn",
   ];
 
   public show: boolean = true;
