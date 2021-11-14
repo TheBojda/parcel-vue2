@@ -7,7 +7,7 @@ import { hashObject } from "@parcel/utils";
 import ThrowableDiagnostic, {
   type Diagnostic,
   escapeMarkdown,
-  md
+  md,
 } from "@parcel/diagnostic";
 import SourceMap from "@parcel/source-map";
 import semver from "semver";
@@ -35,14 +35,14 @@ export default (new Transformer({
         throw new ThrowableDiagnostic({
           diagnostic: {
             message: "Vue config should be an object.",
-            origin: "@parcel/transformer-vue"
-          }
+            origin: "@parcel/transformer-vue",
+          },
         });
       }
     }
     return {
       customBlocks: contents.customBlocks || {},
-      filePath: conf && conf.filePath
+      filePath: conf && conf.filePath,
     };
   },
   canReuseAST({ ast }) {
@@ -53,25 +53,25 @@ export default (new Transformer({
     let code = await asset.getCode();
     let parsed = compiler.parse(code, {
       sourceMap: true,
-      filename: asset.filePath
+      filename: asset.filePath,
     });
     if (parsed.errors.length) {
       throw new ThrowableDiagnostic({
-        diagnostic: parsed.errors.map(err => {
+        diagnostic: parsed.errors.map((err) => {
           return createDiagnostic(err, asset.filePath);
-        })
+        }),
       });
     }
 
     return {
       type: "vue",
       version: "2.6.14",
-      program: parsed.descriptor
+      program: parsed.descriptor,
     };
   },
   async transform({ asset, options, resolve, config }) {
     let id = hashObject({
-      filePath: asset.filePath
+      filePath: asset.filePath,
     }).slice(-6);
     let scopeId = "data-v-" + id;
     let hmrId = id + "-hmr";
@@ -91,7 +91,7 @@ export default (new Transformer({
         options,
         resolve,
         id,
-        hmrId
+        hmrId,
       });
     }
     return [
@@ -154,10 +154,10 @@ ${
 }`
     : ""
 }
-export default script;`
-      }
+export default script;`,
+      },
     ];
-  }
+  },
 }): Transformer);
 
 function createDiagnostic(err, filePath) {
@@ -165,7 +165,7 @@ function createDiagnostic(err, filePath) {
     return {
       message: err,
       origin: "@parcel/transformer-vue",
-      filePath
+      filePath,
     };
   }
   // TODO: codeframe
@@ -173,7 +173,7 @@ function createDiagnostic(err, filePath) {
     message: escapeMarkdown(err.message),
     origin: "@parcel/transformer-vue",
     name: err.name,
-    stack: err.stack
+    stack: err.stack,
   };
   if (err.loc) {
     diagnostic.codeFrames = [
@@ -182,15 +182,15 @@ function createDiagnostic(err, filePath) {
           {
             start: {
               line: err.loc.start.line + err.loc.start.offset,
-              column: err.loc.start.column
+              column: err.loc.start.column,
             },
             end: {
               line: err.loc.end.line + err.loc.end.offset,
-              column: err.loc.end.column
-            }
-          }
-        ]
-      }
+              column: err.loc.end.column,
+            },
+          },
+        ],
+      },
     ];
   }
   return diagnostic;
@@ -207,7 +207,7 @@ async function processPipeline({
   options,
   resolve,
   id,
-  hmrId
+  hmrId,
 }) {
   switch (asset.pipeline) {
     case "template": {
@@ -228,8 +228,8 @@ async function processPipeline({
           throw new ThrowableDiagnostic({
             diagnostic: {
               message: md`Unknown template language: "${template.lang}"`,
-              origin: "@parcel/transformer-vue"
-            }
+              origin: "@parcel/transformer-vue",
+            },
           });
         }
         content = await preprocessor.render(content, {});
@@ -238,15 +238,15 @@ async function processPipeline({
         filename: asset.filePath,
         source: content,
         inMap: template.src ? undefined : template.map,
-        scoped: styles.some(style => style.scoped),
+        scoped: styles.some((style) => style.scoped),
         isFunctional,
-        id
+        id,
       });
       if (templateComp.errors.length) {
         throw new ThrowableDiagnostic({
-          diagnostic: templateComp.errors.map(err => {
+          diagnostic: templateComp.errors.map((err) => {
             return createDiagnostic(err, asset.filePath);
-          })
+          }),
         });
       }
       let templateAsset: TransformerResult = {
@@ -254,7 +254,7 @@ async function processPipeline({
         uniqueKey: asset.id + "-template",
         ...(!template.src &&
           asset.env.sourceMap && {
-            map: createMap(templateComp.map, options.projectRoot)
+            map: createMap(templateComp.map, options.projectRoot),
           }),
         content:
           templateComp.code +
@@ -275,7 +275,7 @@ ${
   })
 }`
     : ""
-}`
+}`,
       };
       return [templateAsset];
     }
@@ -313,8 +313,8 @@ ${
           throw new ThrowableDiagnostic({
             diagnostic: {
               message: md`Unknown script language: "${script.lang}"`,
-              origin: "@parcel/transformer-vue"
-            }
+              origin: "@parcel/transformer-vue",
+            },
           });
       }
       let scriptAsset = {
@@ -323,8 +323,8 @@ ${
         content: script.content,
         ...(!script.src &&
           asset.env.sourceMap && {
-            map: createMap(script.map, options.projectRoot)
-          })
+            map: createMap(script.map, options.projectRoot),
+          }),
       };
 
       return [scriptAsset];
@@ -358,8 +358,8 @@ ${
               throw new ThrowableDiagnostic({
                 diagnostic: {
                   message: md`Unknown style language: "${style.lang}"`,
-                  origin: "@parcel/transformer-vue"
-                }
+                  origin: "@parcel/transformer-vue",
+                },
               });
           }
           let styleComp = await compiler.compileStyle({
@@ -369,13 +369,13 @@ ${
             preprocessLang: style.lang || "css",
             scoped: !!style.scoped,
             map: style.src ? undefined : style.map,
-            id: "data-v-" + id
+            id: "data-v-" + id,
           });
           if (styleComp.errors.length) {
             throw new ThrowableDiagnostic({
-              diagnostic: styleComp.errors.map(err => {
+              diagnostic: styleComp.errors.map((err) => {
                 return createDiagnostic(err, asset.filePath);
-              })
+              }),
             });
           }
           let styleAsset = {
@@ -384,15 +384,15 @@ ${
             sideEffects: true,
             ...(!style.src &&
               asset.env.sourceMap && {
-                map: createMap(style.map, options.projectRoot)
+                map: createMap(style.map, options.projectRoot),
               }),
-            uniqueKey: asset.id + "-style" + i
+            uniqueKey: asset.id + "-style" + i,
           };
           if (styleComp.modules) {
             if (typeof style.module === "boolean") style.module = "$style";
             cssModules[style.module] = {
               ...cssModules[style.module],
-              ...styleComp.modules
+              ...styleComp.modules,
             };
           }
           return styleAsset;
@@ -421,7 +421,7 @@ ${
 };`
     : ""
 }
-export default cssModules;`
+export default cssModules;`,
         });
       }
       return assets;
@@ -438,8 +438,8 @@ export default cssModules;`
           throw new ThrowableDiagnostic({
             diagnostic: {
               message: md`No preprocessor found for block type ${type}`,
-              origin: "@parcel/transformer-vue"
-            }
+              origin: "@parcel/transformer-vue",
+            },
           });
         }
         if (src) {
@@ -459,7 +459,7 @@ let NOOP = () => {};
 ${(
   await Promise.all(
     [...types].map(
-      async type =>
+      async (type) =>
         `import p${type} from './${relative(
           dirname(asset.filePath),
           await resolve(nullthrows(config.filePath), config.customBlocks[type])
@@ -479,8 +479,8 @@ export default script => {
         )});`
     )
     .join("\n")}
-}`
-        }
+}`,
+        },
       ];
     }
     default: {

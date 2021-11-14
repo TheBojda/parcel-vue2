@@ -5,7 +5,8 @@
 	"main": "lib/VueTransformer.js",
 	"scripts": {
 		"build": "babel ./src --out-dir ./lib",
-		"watch": "babel --watch ./src --out-dir ./lib"
+		"watch": "babel --watch ./src --out-dir ./lib",
+		"prettier": "prettier --write src/*.js"
 	},
 	"publishConfig": {
 		"access": "public"
