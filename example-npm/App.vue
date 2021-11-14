@@ -48,37 +48,45 @@
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
-    <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ form }}</pre>
-    </b-card>
+    <Result v-model="result"></Result>
+    <p>A sample <b>p</b> tag</p>
   </b-container>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import Result from "./Result.vue";
 
-@Component
+@Component({
+  components: {
+    Result
+  }
+})
 class App extends Vue {
   public form = {
     email: "",
     name: "",
     food: null,
-    checked: [],
+    checked: []
   };
+
   public foods = [
     { text: "Select One", value: null },
     "Carrots",
     "Beans",
     "Tomatoes",
-    "Corn",
+    "Corn"
   ];
 
   public show: boolean = true;
 
+  get result(): string {
+    return JSON.stringify(this.form, null, 2);
+  }
+
   onSubmit(event) {
     event.preventDefault();
-    console.log('xxx');
-    alert(JSON.stringify(this.form));
+    alert(this.result);
   }
 
   onReset(event) {
