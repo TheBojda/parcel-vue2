@@ -3,6 +3,10 @@
 	"version": "0.1.5",
 	"license": "MIT",
 	"main": "lib/VueTransformer.js",
+	"scripts": {
+		"build": "babel ./src --out-dir ./lib",
+		"watch": "babel --watch ./src --out-dir ./lib"
+	},
 	"publishConfig": {
 		"access": "public"
 	},
